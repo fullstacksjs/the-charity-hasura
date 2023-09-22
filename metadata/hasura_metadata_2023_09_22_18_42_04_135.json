@@ -1,0 +1,939 @@
+{
+  "resource_version": 322,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "default",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "accommodation_type",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "addiction_status",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "bank_account",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "account_number",
+                    "bank_name",
+                    "card_name",
+                    "householder_id"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "account_number",
+                    "bank_name",
+                    "card_name",
+                    "householder_id",
+                    "id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "account_number",
+                    "bank_name",
+                    "card_name",
+                    "householder_id"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "city",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "disability_status",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "document",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "householder_id",
+                    "url"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "url",
+                    "householder_id",
+                    "id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "url"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "gender",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "health_status",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "household",
+              "schema": "public"
+            },
+            "computed_fields": [
+              {
+                "name": "code",
+                "definition": {
+                  "function": {
+                    "name": "format_code",
+                    "schema": "public"
+                  }
+                }
+              },
+              {
+                "name": "members_count",
+                "definition": {
+                  "function": {
+                    "name": "count_members",
+                    "schema": "public"
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "id",
+                    "name"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "severity",
+                    "status",
+                    "updated_at"
+                  ],
+                  "computed_fields": [
+                    "code",
+                    "members_count"
+                  ],
+                  "filter": {},
+                  "allow_aggregations": true
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "name",
+                    "severity",
+                    "status"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "household_project",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "household",
+                "using": {
+                  "foreign_key_constraint_on": "household_id"
+                }
+              },
+              {
+                "name": "project",
+                "using": {
+                  "foreign_key_constraint_on": "project_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "count"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "household_severity",
+              "schema": "public"
+            },
+            "is_enum": true,
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "value",
+                    "description"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "household_status",
+              "schema": "public"
+            },
+            "is_enum": true,
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "value",
+                    "description"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "householder",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "bank_accounts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "bank_account",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "disability_documents",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {},
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "document",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "health_documents",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "document",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "insurances",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "insurance",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "jobs",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "job",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "skills",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "skill",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "subsidies",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "householder_id",
+                    "table": {
+                      "name": "subsidy",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "computed_fields": [
+              {
+                "name": "status",
+                "definition": {
+                  "function": {
+                    "name": "get_householder_status",
+                    "schema": "public"
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "city",
+                    "description",
+                    "dob",
+                    "father_name",
+                    "gender",
+                    "household_id",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "religion",
+                    "surname"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "city",
+                    "description",
+                    "dob",
+                    "father_name",
+                    "gender",
+                    "household_id",
+                    "id",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "religion",
+                    "surname"
+                  ],
+                  "computed_fields": [
+                    "status"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "accommodation_type",
+                    "addiction_status",
+                    "address",
+                    "city",
+                    "description",
+                    "disability_description",
+                    "disability_status",
+                    "dob",
+                    "father_name",
+                    "financial_comment",
+                    "gender",
+                    "health_comment",
+                    "health_description",
+                    "health_status",
+                    "household_id",
+                    "income",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "neighborhood",
+                    "prior_accommodation_address",
+                    "province",
+                    "religion",
+                    "rent",
+                    "surname",
+                    "zip_code"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "insurance",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "id",
+                    "name"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "check": {}
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "job",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "title",
+                    "householder_id",
+                    "id"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "title",
+                    "householder_id",
+                    "id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "title"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "member",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "household",
+                "using": {
+                  "foreign_key_constraint_on": "household_id"
+                }
+              }
+            ],
+            "computed_fields": [
+              {
+                "name": "status",
+                "definition": {
+                  "function": {
+                    "name": "get_member_status",
+                    "schema": "public"
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "dob",
+                    "household_id",
+                    "father_name",
+                    "gender",
+                    "id",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "religion",
+                    "surname"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "dob",
+                    "father_name",
+                    "gender",
+                    "household_id",
+                    "id",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "religion",
+                    "surname",
+                    "updated_at"
+                  ],
+                  "computed_fields": [
+                    "status"
+                  ],
+                  "filter": {},
+                  "allow_aggregations": true
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "dob",
+                    "father_name",
+                    "gender",
+                    "household_id",
+                    "name",
+                    "national_id",
+                    "nationality",
+                    "religion",
+                    "surname"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "nationality",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "project",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "households",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "project_id",
+                    "table": {
+                      "name": "household_project",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "description",
+                    "due_date",
+                    "name",
+                    "start_date",
+                    "status"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "description",
+                    "due_date",
+                    "id",
+                    "name",
+                    "start_date",
+                    "status",
+                    "updated_at"
+                  ],
+                  "filter": {},
+                  "allow_aggregations": true
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "description",
+                    "due_date",
+                    "name",
+                    "start_date",
+                    "status"
+                  ],
+                  "filter": {},
+                  "check": {}
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "project_status",
+              "schema": "public"
+            },
+            "is_enum": true,
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "comment",
+                    "value"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "religion",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "skill",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "name",
+                    "householder_id",
+                    "id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "subsidy",
+              "schema": "public"
+            },
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ]
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "name",
+                    "householder_id",
+                    "id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "householder_id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": {
+              "from_env": "HASURA_GRAPHQL_METADATA_DATABASE_URL"
+            },
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      }
+    ]
+  }
+}
