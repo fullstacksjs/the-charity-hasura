@@ -1,0 +1,4 @@
+table:
+  name: religion
+  schema: public
+is_enum: true

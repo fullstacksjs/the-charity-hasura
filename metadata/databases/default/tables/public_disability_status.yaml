@@ -1,0 +1,4 @@
+table:
+  name: disability_status
+  schema: public
+is_enum: true

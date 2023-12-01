@@ -1,0 +1,50 @@
+table:
+  name: project
+  schema: public
+array_relationships:
+  - name: households
+    using:
+      foreign_key_constraint_on:
+        column: project_id
+        table:
+          name: household_project
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - description
+        - due_date
+        - name
+        - start_date
+        - status
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - description
+        - due_date
+        - id
+        - name
+        - start_date
+        - status
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - description
+        - due_date
+        - name
+        - start_date
+        - status
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

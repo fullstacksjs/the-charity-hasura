@@ -235,6 +235,10 @@ CREATE TABLE public.job (
 CREATE TABLE public.nationality (
     value text NOT NULL
 );
+CREATE TABLE public.neighborhood (
+    name text NOT NULL,
+    city text NOT NULL
+);
 CREATE TABLE public.project (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -309,6 +313,8 @@ ALTER TABLE ONLY public.member
     ADD CONSTRAINT member_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.nationality
     ADD CONSTRAINT nationality_pkey PRIMARY KEY (value);
+ALTER TABLE ONLY public.neighborhood
+    ADD CONSTRAINT neighborhood_pkey PRIMARY KEY (name);
 ALTER TABLE ONLY public.project
     ADD CONSTRAINT project_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.project_status
@@ -359,6 +365,8 @@ ALTER TABLE ONLY public.householder
     ADD CONSTRAINT householder_household_id_fkey FOREIGN KEY (household_id) REFERENCES public.household(id) ON UPDATE RESTRICT ON DELETE CASCADE;
 ALTER TABLE ONLY public.householder
     ADD CONSTRAINT householder_nationality_fkey FOREIGN KEY (nationality) REFERENCES public.nationality(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.householder
+    ADD CONSTRAINT householder_neighborhood_fkey FOREIGN KEY (neighborhood) REFERENCES public.neighborhood(name) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.householder
     ADD CONSTRAINT householder_religion_fkey FOREIGN KEY (religion) REFERENCES public.religion(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.insurance

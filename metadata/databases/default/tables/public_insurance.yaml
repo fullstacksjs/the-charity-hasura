@@ -1,0 +1,30 @@
+table:
+  name: insurance
+  schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - householder_id
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - householder_id
+        - id
+        - name
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - householder_id
+        - name
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

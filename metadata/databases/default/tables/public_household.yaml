@@ -1,0 +1,49 @@
+table:
+  name: household
+  schema: public
+computed_fields:
+  - name: code
+    definition:
+      function:
+        name: format_code
+        schema: public
+  - name: members_count
+    definition:
+      function:
+        name: count_members
+        schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - id
+        - name
+        - severity
+        - status
+        - updated_at
+      computed_fields:
+        - code
+        - members_count
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - severity
+        - status
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

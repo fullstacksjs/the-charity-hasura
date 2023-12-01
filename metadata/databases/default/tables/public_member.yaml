@@ -1,0 +1,67 @@
+table:
+  name: member
+  schema: public
+object_relationships:
+  - name: household
+    using:
+      foreign_key_constraint_on: household_id
+computed_fields:
+  - name: status
+    definition:
+      function:
+        name: get_member_status
+        schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - dob
+        - household_id
+        - father_name
+        - gender
+        - id
+        - name
+        - national_id
+        - nationality
+        - religion
+        - surname
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - dob
+        - father_name
+        - gender
+        - household_id
+        - id
+        - name
+        - national_id
+        - nationality
+        - religion
+        - surname
+        - updated_at
+      computed_fields:
+        - status
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - dob
+        - father_name
+        - gender
+        - household_id
+        - name
+        - national_id
+        - nationality
+        - religion
+        - surname
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

@@ -1,0 +1,31 @@
+table:
+  name: job
+  schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - title
+        - householder_id
+        - id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - title
+        - householder_id
+        - id
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - householder_id
+        - title
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

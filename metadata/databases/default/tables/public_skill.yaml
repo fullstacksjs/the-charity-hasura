@@ -1,0 +1,30 @@
+table:
+  name: skill
+  schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - householder_id
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - householder_id
+        - id
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - householder_id
+        - name
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

@@ -1,0 +1,148 @@
+table:
+  name: householder
+  schema: public
+array_relationships:
+  - name: bank_accounts
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: bank_account
+          schema: public
+  - name: disability_documents
+    using:
+      manual_configuration:
+        column_mapping: {}
+        insertion_order: null
+        remote_table:
+          name: document
+          schema: public
+  - name: health_documents
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: document
+          schema: public
+  - name: insurances
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: insurance
+          schema: public
+  - name: jobs
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: job
+          schema: public
+  - name: skills
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: skill
+          schema: public
+  - name: subsidies
+    using:
+      foreign_key_constraint_on:
+        column: householder_id
+        table:
+          name: subsidy
+          schema: public
+computed_fields:
+  - name: status
+    definition:
+      function:
+        name: get_householder_status
+        schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - city
+        - description
+        - dob
+        - father_name
+        - gender
+        - household_id
+        - name
+        - national_id
+        - nationality
+        - religion
+        - surname
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - accommodation_type
+        - addiction_status
+        - address
+        - city
+        - created_at
+        - description
+        - disability_description
+        - disability_status
+        - dob
+        - father_name
+        - financial_comment
+        - gender
+        - health_comment
+        - health_description
+        - health_status
+        - household_id
+        - id
+        - income
+        - name
+        - national_id
+        - nationality
+        - neighborhood
+        - prior_accommodation_address
+        - province
+        - religion
+        - rent
+        - surname
+        - updated_at
+        - zip_code
+      computed_fields:
+        - status
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - accommodation_type
+        - addiction_status
+        - address
+        - city
+        - description
+        - disability_description
+        - disability_status
+        - dob
+        - father_name
+        - financial_comment
+        - gender
+        - health_comment
+        - health_description
+        - health_status
+        - household_id
+        - income
+        - name
+        - national_id
+        - nationality
+        - neighborhood
+        - prior_accommodation_address
+        - province
+        - religion
+        - rent
+        - surname
+        - zip_code
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}
