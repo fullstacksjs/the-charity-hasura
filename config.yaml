@@ -1,5 +1,5 @@
 version: 3
-endpoint: https://api.fullstacksjs.com/
+endpoint: https://charity-api.fullstacksjs.com/
 admin_secret: ${HASURA_GRAPHQL_ADMIN_SECRET}
 metadata_directory: metadata
 actions:
